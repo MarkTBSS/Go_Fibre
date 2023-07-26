@@ -1,0 +1,33 @@
+[Hello World!]
+===========================
+package main
+import "github.com/gofiber/fiber/v2"
+func main() {
+	app := fiber.New()
+	app.Get("/", func(c *fiber.Ctx) error {
+		return c.SendString("Hello, World!")
+	})
+	app.Listen(":3000")
+}
+============================
+// Ctx represents the Context which hold the HTTP request and response.
+// It has methods for the request query string, parameters, body, HTTP headers and so on.
+type Ctx struct {
+	app                 *App                 // Reference to *App
+	route               *Route               // Reference to *Route
+	indexRoute          int                  // Index of the current route
+	indexHandler        int                  // Index of the current handler
+	method              string               // HTTP method
+	methodINT           int                  // HTTP method INT equivalent
+	baseURI             string               // HTTP base uri
+	path                string               // HTTP path with the modifications by the configuration -> string copy from pathBuffer
+	pathBuffer          []byte               // HTTP path buffer
+	detectionPath       string               // Route detection path                                  -> string copy from detectionPathBuffer
+	detectionPathBuffer []byte               // HTTP detectionPath buffer
+	treePath            string               // Path for the search in the tree
+	pathOriginal        string               // Original HTTP path
+	values              [maxParams]string    // Route parameter values
+	fasthttp            *fasthttp.RequestCtx // Reference to *fasthttp.RequestCtx
+	matched             bool                 // Non use route matched
+	viewBindMap         sync.Map             // Default view map to bind template engine
+}
