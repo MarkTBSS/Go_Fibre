@@ -1,0 +1,4 @@
+[Welcome]
+
+- go mod init github.com/MarkTBSS/Go_Fibre.git
+- go get github.com/gofiber/fiber/v2
